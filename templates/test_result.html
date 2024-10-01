@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Test Result{% endblock %}
+
+{% block content %}
+<div class="container my-1">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="text-center fs-3">Diabetes Prediction Report</h4>
+                </div>
+                <div class="card-body">
+                    <h4>Patient Information</h4>
+                    <p><strong>Name:</strong> {{ patient_name }}</p>
+                    <p><strong>Age:</strong> {{ patient_age }}</p>
+                    <p><strong>Gender:</strong> {{ patient_gender }}</p>
+                    <hr>
+                    <h4>Test Inputs</h4>
+                    <p><strong>Pregnancies:</strong> {{ pregnancies }}</p>
+                    <p><strong>Glucose Level:</strong> {{ glucose_level }}</p>
+                    <p><strong>Blood Pressure:</strong> {{ blood_pressure }}</p>
+                    <p><strong>Skin Thickness:</strong> {{ skin_thickness }}</p>
+                    <p><strong>Insulin:</strong> {{ insulin }}</p>
+                    <p><strong>BMI:</strong> {{ bmi }}</p>
+                    <p><strong>Diabetes Pedigree Function:</strong> {{ diabetes_pedigree_function }}</p>
+                    <p><strong>Age:</strong> {{ patient_age }}</p>
+                    <hr>
+                    <h4>Prediction Result</h4>
+                    <p><strong>Diabetes Prediction:</strong> {{ prediction }}</p>
+                    <!-- <p><strong>Probability:</strong> {{ probability }}%</p> -->
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-primary" onclick="window.print()">Print Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
