@@ -1,0 +1,57 @@
+# Python-specific ignores
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebook checkpoints (if applicable)
+.ipynb_checkpoints/
+
+# Machine Learning model files (example: pickle files, joblib)
+*.pkl
+*.sav
+*.h5
+*.model
+*.joblib
+
+# Cache files
+*.cache
+*.pyo
+*.pyd
+
+# Pytest cache
+.pytest_cache/
+
+# SQLite database (if you use SQLite locally)
+*.sqlite3
+*.db
+
+# IDE-specific ignores (e.g., VSCode, PyCharm)
+.vscode/
+.idea/
+
+# OS-specific files (e.g., macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# FastAPI-specific
+# Gunicorn or Uvicorn log files (if applicable)
+*.log
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore static/media (if generated dynamically)
+staticfiles/
+mediafiles/
