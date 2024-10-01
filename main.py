@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, RedirectResponse
-from typing import Union
+from typing import Union, Optional
 import pickle
 
 app = FastAPI()
@@ -11,25 +11,43 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-@app.post('/predict')
+@app.post('/predict', response_class=HTMLResponse)
 async def predict_diabetes(request: Request,
+    patient_name: Optional[str] = Form(None),
+    patient_gender: Optional[str] = Form(None),
     pregnancies: int = Form(...),
     glucose: Union[float, int] = Form(...),
-    bloodPressure: Union[float, int] = Form(...),
-    skinThickness: Union[float, int] = Form(...),
+    blood_pressure: Union[float, int] = Form(...),
+    skin_thickness: Union[float, int] = Form(...),
     insulin: Union[float, int] = Form(...),
     bmi: Union[float, int] = Form(...),
-    diabetesPedigreeFunction: Union[float, int] = Form(...),
+    diabetes_pedigree_function: Union[float, int] = Form(...),
     age: int = Form(...)
 ):
     diabetes_model = pickle.load(open('diabetes_model_RandomForestClassifier.sav', 'rb'))
-    diab_prediction = diabetes_model.predict([[pregnancies, glucose, bloodPressure, skinThickness, insulin, bmi, diabetesPedigreeFunction, age]])
+    diab_prediction = diabetes_model.predict([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree_function, age]])
     
     result = diab_prediction[0]
+    
+    if result == 1:
+        prediction = "Diabetes Positve"
+    else:
+        prediction = "Diabetes Negative"
+        
     context = {
-        "result": result,
+        "patient_name": patient_name,
+        "patient_gender": patient_gender,
+        "pregnancies": pregnancies,
+        "glucose_level": glucose,
+        "blood_pressure": blood_pressure,
+        "skin_thickness": skin_thickness,
+        "insulin": insulin,
+        "bmi": bmi,
+        "diabetes_pedigree_function": diabetes_pedigree_function,
+        "patient_age": age,
+        "prediction": prediction
     }
-    return templates.TemplateResponse(request=request, name="home.html", context=context)
+    return templates.TemplateResponse(request=request, name="test_result.html", context=context)
 
 
 @app.get("/about", response_class=HTMLResponse)
