@@ -1,6 +1,10 @@
 Author: Sabbir Hossain
 Date: 01/10/24
 
+Windows project setup and run:
+
+create venv: python -m venv venv
+activate venv: venv\Scripts\activate
 install packages: pip install -r requirements.txt
 open jupyter notebook if needed: python -m jupyter notebook
 run app: fastapi dev main.py
